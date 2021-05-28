@@ -1,0 +1,14 @@
+{
+    "name": "textmate-debug",
+    "author": "Merijn Hendriks",
+    "version": "1.0.0",
+    "license": "NCSA",
+    "main": "index.mjs",
+    "scripts": {
+        "start": "node index.mjs"
+    },
+    "dependencies": {
+        "vscode-textmate": "5.4.0",
+        "vscode-oniguruma": "1.5.1"
+    }
+}
