@@ -1,0 +1,673 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Fox",
+	"scopeName": "source.fox",
+	"fileTypes": [
+		"fox"
+	],
+	"patterns": [
+		{
+			"include": "#identifier"
+		},
+		{
+			"include": "#literals"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#type"
+		},
+		{
+			"include": "#keywords"
+		}
+	],
+	"repository": {
+		"identifier": {
+			"name": "identifier.fox",
+			"match": "\\b[[:alpha:]][[:alnum:]]*\\b"
+		},
+		"punctuation-accessor": {
+			"name": "punctuation.accessor.fox",
+			"match": "\\."
+		},
+		"punctuation-comma": {
+			"name": "punctuation.separator.comma.fox",
+			"match": ","
+		},
+		"punctuation-semicolon": {
+			"name": "punctuation.terminator.statement.fox",
+			"match": ";"
+		},
+		"comment-block": {
+			"name": "comment.block.fox",
+			"begin": "/\\*",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.fox"
+				}
+			},
+			"end": "\\*/",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.fox"
+				}
+			}
+		},
+		"comment-single": {
+			"begin": "(^[ \\t]+)?(?=//)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.whitespace.comment.leading.fox"
+				}
+			},
+			"end": "(?=$)",
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.fox",
+					"begin": "//",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.fox"
+						}
+					},
+					"end": "(?=$)"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"include": "#comment-block"
+				},
+				{
+					"include": "#comment-single"
+				}
+			]
+		},
+		"null-literal": {
+			"name": "constant.language.null.fox",
+			"match": "(?<!\\.)\\b(null)\\b"
+		},
+		"boolean-literal-true": {
+			"name": "constant.language.boolean.true.fox",
+			"match": "(?<!\\.)\\b(true)\\b"
+		},
+		"boolean-literal-false": {
+			"name": "constant.language.boolean.false.fox",
+			"match": "(?<!\\.)\\b(false)\\b"
+		},
+		"numeric-literal-hex": {
+			"name": "constant.numeric.hex.fox",
+			"match": "\\b0(x)[0-9a-f]?\\b"
+		},
+		"numeric-literal-float": {
+			"name": "constant.numeric.float.fox",
+			"match": "\\b([0-9]+)?\\.[0-9]+((e)[0-9])?\\b"
+		},
+		"numeric-literal-integer": {
+			"name": "constant.numeric.integer.fox",
+			"match": "(?<!\\.)\\b([0-9](?!\\.))+((e)[0-9])?\\b"
+		},
+		"string-character-escape": {
+			"name": "constant.character.escape.fox",
+			"match": "\\\\."
+		},
+		"string-literal": {
+			"name": "string.quoted.double.fox",
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.fox"
+				}
+			},
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.fox"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+		},
+		"char-literal": {
+			"name": "string.quoted.single.fox",
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.char.begin.fox"
+				}
+			},
+			"end": "'",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.char.end.fox"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+		},
+		"boolean-literal": {
+			"patterns": [
+				{
+					"include": "#boolean-literal-true"
+				},
+				{
+					"include": "#boolean-literal-false"
+				}
+			]
+		},
+		"numeric-literal": {
+			"patterns": [
+				{
+					"include": "#numeric-literal-hex"
+				},
+				{
+					"include": "#numeric-literal-float"
+				},
+				{
+					"include": "#numeric-literal-integer"
+				}
+			]
+		},
+		"literals": {
+			"patterns": [
+				{
+					"include": "#null-literal"
+				},
+				{
+					"include": "#boolean-literal"
+				},
+				{
+					"include": "#numeric-literal"
+				},
+				{
+					"include": "#string-literal"
+				},
+				{
+					"include": "#char-literal"
+				}
+			]
+		},
+		"add-operator": {
+			"name": "keyword.operator.add.fox",
+			"match": "\\+"
+		},
+		"substract-operator": {
+			"name": "keyword.operator.substract.fox",
+			"match": "-"
+		},
+		"multiply-operator": {
+			"name": "keyword.operator.multiply.fox",
+			"match": "\\*"
+		},
+		"divide-operator": {
+			"name": "keyword.operator.divide.fox",
+			"match": "/"
+		},
+		"modulo-operator": {
+			"name": "keyword.operator.modulo.fox",
+			"match": "%"
+		},
+		"increment-operator": {
+			"name": "keyword.operator.increment.fox",
+			"match": "\\+\\+"
+		},
+		"decrement-operator": {
+			"name": "keyword.operator.decrement.fox",
+			"match": "--"
+		},
+		"equals-operator": {
+			"name": "keyword.operator.equals.fox",
+			"match": "=="
+		},
+		"notequals-operator": {
+			"name": "keyword.operator.notequals.fox",
+			"match": "!="
+		},
+		"greaterthan-operator": {
+			"name": "keyword.operator.greaterthan.fox",
+			"match": ">"
+		},
+		"lessthan-operator": {
+			"name": "keyword.operator.lessthan.fox",
+			"match": "<"
+		},
+		"greaterequals-operator": {
+			"name": "keyword.operator.greaterequals.fox",
+			"match": ">="
+		},
+		"lessequals-operator": {
+			"name": "keyword.operator.lessequals.fox",
+			"match": "<="
+		},
+		"not-operator": {
+			"name": "keyword.operator.not.fox",
+			"match": "!"
+		},
+		"and-operator": {
+			"name": "keyword.operator.and.fox",
+			"match": "&&"
+		},
+		"or-operator": {
+			"name": "keyword.operator.or.fox",
+			"match": "\\|\\|"
+		},
+		"bitwise-not-operator": {
+			"name": "keyword.operator.bitwise.not.fox",
+			"match": "~"
+		},
+		"bitwise-and-operator": {
+			"name": "keyword.operator.bitwise.and.fox",
+			"match": "\\&"
+		},
+		"bitwise-or-operator": {
+			"name": "keyword.operator.bitwise.or.fox",
+			"match": "\\|"
+		},
+		"bitwise-xor-operator": {
+			"name": "keyword.operator.bitwise.xor.fox",
+			"match": "\\^"
+		},
+		"bitwise-left-shift-operator": {
+			"name": "keyword.operator.bitwise.shift.left.fox",
+			"match": "<<"
+		},
+		"bitwise-right-shift-operator": {
+			"name": "keyword.operator.bitwise.shift.right.fox",
+			"match": ">>"
+		},
+		"assign-operator": {
+			"name": "keyword.operator.assign.fox",
+			"match": "\\="
+		},
+		"assign-add-operator": {
+			"name": "keyword.operator.assign.add.fox",
+			"match": "\\+="
+		},
+		"assign-substract-operator": {
+			"name": "keyword.operator.assign.substract.fox",
+			"match": "-="
+		},
+		"assign-multiply-operator": {
+			"name": "keyword.operator.assign.multiply.fox",
+			"match": "\\*="
+		},
+		"assign-divide-operator": {
+			"name": "keyword.operator.assign.divide.fox",
+			"match": "/="
+		},
+		"assign-modulo-operator": {
+			"name": "keyword.operator.assign.modulo.fox",
+			"match": "%="
+		},
+		"assign-bitwise-and-operator": {
+			"name": "keyword.operator.assign.bitwise.and.fox",
+			"match": "\\&="
+		},
+		"assign-bitwise-or-operator": {
+			"name": "keyword.operator.assign.bitwise.or.fox",
+			"match": "\\|="
+		},
+		"assign-bitwise-xor-operator": {
+			"name": "keyword.operator.assign.bitwise.xor.fox",
+			"match": "\\^="
+		},
+		"assign-bitwise-left-shift-operator": {
+			"name": "keyword.operator.assign.bitwise.shift.leftfox",
+			"match": "<<="
+		},
+		"assign-bitwise-right-shift-operator": {
+			"name": "keyword.operator.assign.bitwise.shift.rightfox",
+			"match": ">>="
+		},
+		"conditional-operator": {
+			"begin": "(?<!\\?)\\?(?!\\?|\\.|\\[)",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.operator.conditional.question-mark.fox"
+				}
+			},
+			"end": ":",
+			"endCaptures": {
+				"0": {
+					"name": "keyword.operator.conditional.colon.fox"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"include": "#add-operator"
+				},
+				{
+					"include": "#substract-operator"
+				},
+				{
+					"include": "#multiply-operator"
+				},
+				{
+					"include": "#divide-operator"
+				},
+				{
+					"include": "#modulo-operator"
+				},
+				{
+					"include": "#increment-operator"
+				},
+				{
+					"include": "#decrement-operator"
+				},
+				{
+					"include": "#equals-operator"
+				},
+				{
+					"include": "#notequals-operator"
+				},
+				{
+					"include": "#greaterthan-operator"
+				},
+				{
+					"include": "#lessthan-operator"
+				},
+				{
+					"include": "#greaterequals-operator"
+				},
+				{
+					"include": "#lessequals-operator"
+				},
+				{
+					"include": "#not-operator"
+				},
+				{
+					"include": "#and-operator"
+				},
+				{
+					"include": "#or-operator"
+				},
+				{
+					"include": "#bitwise-not-operator"
+				},
+				{
+					"include": "#bitwise-and-operator"
+				},
+				{
+					"include": "#bitwise-or-operator"
+				},
+				{
+					"include": "#bitwise-xor-operator"
+				},
+				{
+					"include": "#bitwise-left-shift-operator"
+				},
+				{
+					"include": "#bitwise-right-shift-operator"
+				},
+				{
+					"include": "#assign-operator"
+				},
+				{
+					"include": "#assign-add-operator"
+				},
+				{
+					"include": "#assign-substract-operator"
+				},
+				{
+					"include": "#assign-multiply-operator"
+				},
+				{
+					"include": "#assign-divide-operator"
+				},
+				{
+					"include": "#assign-modulo-operator"
+				},
+				{
+					"include": "#assign-bitwise-and-operator"
+				},
+				{
+					"include": "#assign-bitwise-or-operator"
+				},
+				{
+					"include": "#assign-bitwise-xor-operator"
+				},
+				{
+					"include": "#assign-bitwise-left-shift-operator"
+				},
+				{
+					"include": "#assign-bitwise-right-shift-operator"
+				},
+				{
+					"include": "#conditional-operator"
+				}
+			]
+		},
+		"void-type": {
+			"name": "keyword.type.void",
+			"match": "(?<!\\.)\\b(void)\\b"
+		},
+		"bool-type": {
+			"name": "keyword.type.bool",
+			"match": "(?<!\\.)\\b(bool)\\b"
+		},
+		"sbyte-type": {
+			"name": "keyword.type.bool",
+			"match": "(?<!\\.)\\b(sbyte)\\b"
+		},
+		"short-type": {
+			"name": "keyword.type.bool",
+			"match": "(?<!\\.)\\b(bool)\\b"
+		},
+		"int-type": {
+			"name": "keyword.type.bool",
+			"match": "(?<!\\.)\\b(int)\\b"
+		},
+		"long-type": {
+			"name": "keyword.type.long",
+			"match": "(?<!\\.)\\b(long)\\b"
+		},
+		"byte-type": {
+			"name": "keyword.type.byte",
+			"match": "(?<!\\.)\\b(byte)\\b"
+		},
+		"ushort-type": {
+			"name": "keyword.type.ushort",
+			"match": "(?<!\\.)\\b(ushort)\\b"
+		},
+		"uint-type": {
+			"name": "keyword.type.uint",
+			"match": "(?<!\\.)\\b(uint)\\b"
+		},
+		"ulong-type": {
+			"name": "keyword.type.ulong",
+			"match": "(?<!\\.)\\b(ulong)\\b"
+		},
+		"float-type": {
+			"name": "keyword.type.float",
+			"match": "(?<!\\.)\\b(float)\\b"
+		},
+		"double-type": {
+			"name": "keyword.type.double",
+			"match": "(?<!\\.)\\b(double)\\b"
+		},
+		"char-type": {
+			"name": "keyword.type.char",
+			"match": "(?<!\\.)\\b(char)\\b"
+		},
+		"string-type": {
+			"name": "keyword.type.string",
+			"match": "(?<!\\.)\\b(string)\\b"
+		},
+		"func-type": {
+			"name": "keyword.type.func",
+			"match": "(?<!\\.)\\b(func)\\b"
+		},
+		"type-builtin": {
+			"patterns": [
+				{
+					"include": "#void-type"
+				},
+				{
+					"include": "#bool-type"
+				},
+				{
+					"include": "#sbyte-type"
+				},
+				{
+					"include": "#short-type"
+				},
+				{
+					"include": "#int-type"
+				},
+				{
+					"include": "#long-type"
+				},
+				{
+					"include": "#byte-type"
+				},
+				{
+					"include": "#ushort-type"
+				},
+				{
+					"include": "#uint-type"
+				},
+				{
+					"include": "#ulong-type"
+				},
+				{
+					"include": "#float-type"
+				},
+				{
+					"include": "#double-type"
+				},
+				{
+					"include": "#char-type"
+				},
+				{
+					"include": "#string-type"
+				},
+				{
+					"include": "#func-type"
+				}
+			]
+		},
+		"type-name": {
+			"patterns": [
+				{
+					"match": "(<identifier>*)\\s*(\\:\\:)",
+					"captures": {
+						"1": {
+							"name": "entity.name.type.alias.fox"
+						},
+						"2": {
+							"name": "punctuation.separator.coloncolon.fox"
+						}
+					}
+				},
+				{
+					"match": "(<identifier>*)\\s*(\\.)",
+					"captures": {
+						"1": {
+							"name": "storage.type.fox"
+						},
+						"2": {
+							"name": "punctuation.accessor.fox"
+						}
+					}
+				},
+				{
+					"match": "(\\.)\\s*(<identifier>*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.accessor.fox"
+						},
+						"2": {
+							"name": "storage.type.fox"
+						}
+					}
+				},
+				{
+					"name": "storage.type.fox",
+					"match": "<identifier>*"
+				}
+			]
+		},
+		"type-arguments": {
+			"begin": "<",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.typeparameters.begin.fox"
+				}
+			},
+			"end": ">",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.typeparameters.end.fox"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#type"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"type-array-suffix": {
+			"begin": "\\[",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.squarebracket.open.fox"
+				}
+			},
+			"end": "\\]",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.squarebracket.close.fox"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"type": {
+			"name": "meta.type.fox",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#type-builtin"
+				},
+				{
+					"include": "#type-name"
+				},
+				{
+					"include": "#type-arguments"
+				},
+				{
+					"include": "#type-array-suffix"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": []
+		}
+	}
+}

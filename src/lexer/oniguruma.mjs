@@ -19,7 +19,7 @@ export default class Oniguruma
 {
     static registry = {};
     static sources = {
-        "source.cs": "./input/csharp.tmLanguage.json"
+        "source.fox": "./input/fox.tmLanguage.json"
     };
 
     static loadGrammar(scopeName)
@@ -47,31 +47,42 @@ export default class Oniguruma
         });
     }
 
-    static async showTokens(scopeName, text)
+    static async tokenize(text, scopeName)
     {
         const grammar = await Oniguruma.registry.loadGrammar(scopeName);
+        const lines = text.split('\n');
         let ruleStack = vsctm.INITIAL;
+        let result = [];
 
         if (!grammar)
         {
             console.log(`Unknown scope name: ${scopeName}`);
-            return;
+            return [];
         }
 
-        for (let i = 0; i < text.length; i++)
+        for (const it in lines)
         {
-            const line = text[i];
-            const lineTokens = grammar.tokenizeLine(line, ruleStack);
+            result[it] = grammar.tokenizeLine(lines[it], ruleStack);
+            ruleStack = result[it].ruleStack;
+        }
 
-            console.log(`\nTokenizing line: ${line}`);
+        return result;
+    }
 
-            for (let j = 0; j < lineTokens.tokens.length; j++)
+    static showTokens(text, tokenized)
+    {
+        const lines = text.split('\n');
+
+        for (const it in lines)
+        {
+            console.log(`\nLine: ${lines[it]}`);
+
+            for (const token of tokenized[it].tokens)
             {
-                const token = lineTokens.tokens[j];
-                console.log(` - token from ${token.startIndex} to ${token.endIndex}, (${line.substring(token.startIndex, token.endIndex)}), with scopes ${token.scopes.join(', ')}`);
+                console.log(` - token from ${token.startIndex} to ${token.endIndex},`
+                            + `(${lines[it].substring(token.startIndex, token.endIndex)}),`
+                            + ` with scopes ${token.scopes.join(", ")}`);
             }
-
-            ruleStack = lineTokens.ruleStack;
         }
     }
 }

@@ -3,11 +3,13 @@ import Oniguruma from "./lexer/oniguruma.mjs";
 
 export default class Program
 {
-    static main(args)
+    static async main(args)
     {
-        const text = VFS.readFile(VFS.fromCwd("./input/program.cs")).toString();
-
         Oniguruma.initialize();
-        Oniguruma.showTokens("source.cs", text);
+
+        const text = VFS.readFile(VFS.fromCwd("./input/program.fox")).toString();
+        const tokenized = await Oniguruma.tokenize(text, "source.fox");
+
+        Oniguruma.showTokens(text, tokenized);
     }
 }
